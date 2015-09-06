@@ -32,6 +32,7 @@ function exp(p,ak){
 
   return r;
 }
+
 function series(m, id){
 
  var k;
@@ -59,4 +60,21 @@ function series(m, id){
     s = s - parseInt(s);
   }
   return s;
+}
+
+function get_byte(id)
+{
+  s1 = series (1, id);
+  s2 = series (4, id);
+  s3 = series (5, id);
+  s4 = series (6, id);
+  pid = 4. * s1 - 2. * s2 - s3 - s4;
+  pid = pid - parseInt(pid) + 1.;
+
+  y = fabs(pid);
+  y = 16. * (y - Math.floor (y));
+  first = y;
+  y = 16. * (y - Math.floor (y));
+  second = y;
+  return (first << 4) | second;
 }
