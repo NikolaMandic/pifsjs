@@ -32,3 +32,31 @@ function exp(p,ak){
 
   return r;
 }
+function series(m, id){
+
+ var k;
+ var ak,p,s,t;
+ var eps = Math.pow(1,-17);
+ s=0;
+
+/*  Sum the series up to id. */
+
+  for (k = 0; k < id; k++){
+    ak = 8 * k + m;
+    p = id - k;
+    t = expm (p, ak);
+    s = s + t / ak;
+    s = s - parseInt(s);
+  }
+
+/*  Compute a few terms where k >= id. */
+
+  for (k = id; k <= id + 100; k++){
+    ak = 8 * k + m;
+    t = Math.pow(16.,  (id - k)) / ak;
+    if (t < eps) break;
+    s = s + t;
+    s = s - parseInt(s);
+  }
+  return s;
+}
